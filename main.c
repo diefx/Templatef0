@@ -36,7 +36,6 @@ int main ( void ) /* {{{{ */
  * ----------------------------------------------------------------------------------------------*/
 static void app_setup( void ) /* {{{{ */
 {
-    hal_system_init( );
     hal_init( );
 } /* }}}} */
 
@@ -48,17 +47,17 @@ static void app_setup( void ) /* {{{{ */
 static void app_task_heartBit( void *params ) /* {{{{ */
 {
     hal_gpio_init_t led_struct;
-    __hal_rcc_gpiob_clk_enable( );
+    __hal_rcc_gpioa_clk_enable( );
 
     led_struct.mode  = _hal_gpio_mode_output_pp;
     led_struct.pull  = _hal_gpio_pullup;
     led_struct.speed = _hal_gpio_speed_freq_low;
     led_struct.pin   = _hal_gpio_pin_5;
-    hal_gpio_init( GPIOB, &led_struct );
+    hal_gpio_init( GPIOA, &led_struct );
 
     for( ; ; )
     {
-        hal_gpio_togglePin( GPIOB, _hal_gpio_pin_5 );
+        hal_gpio_togglePin( GPIOA, _hal_gpio_pin_5 );
         os_task_delay( 1000u );
     }
 } /* }}}} */
