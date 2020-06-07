@@ -108,10 +108,10 @@ clean :
 	rm -r Output
 
 flash :
-	sudo openocd -f board/st_nucleo_f0.cfg -c "program Output/$(PROJECT).hex verify reset" -c shutdown
+	openocd -f interface/stlink-v2-1.cfg -f target/stm32f0x.cfg -c "program Output/$(PROJECT).hex verify reset" -c shutdown
 
 open :
-	sudo openocd -f board/st_nucleo_f0.cfg -c "reset_config srst_only srst_nogate"
+	openocd -f interface/stlink-v2-1.cfg -f target/stm32f0x.cfg -c "reset_config srst_only srst_nogate"
 
 debug :
 	$(DB) -ex "target remote localhost:3333" -ex "mon arm semihosting enable" Output/$(PROJECT).elf -ex "load" -ex "mon reset halt"
