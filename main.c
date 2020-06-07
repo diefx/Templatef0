@@ -23,10 +23,13 @@ static void app_task_heartBit( void *params );
   * ---------------------------------------------------------------------------------------------*/
 int main ( void )
 {
+    /* Call the basic initializations like clock configuration */
     app_setup( );
 
+    /* Place as many task need to registered to run */
     os_task_create( app_task_heartBit, "bit", 128u, NULL, 2u, NULL );
-    
+
+    /* Run the freertos scheduler */   
     os_kernel_startScheduler( );
     /* Program never reach this point */
     __sys_assert( 0u );
@@ -50,6 +53,7 @@ static void app_setup( void )
 static void app_task_heartBit( void *params )
 {
     hal_gpio_init_t led_struct;
+    
     __hal_rcc_gpioa_clk_enable( );
 
     led_struct.mode  = _hal_gpio_mode_output_pp;
