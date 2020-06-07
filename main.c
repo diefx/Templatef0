@@ -71,6 +71,35 @@ static void app_task_heartBit( void *params )
 
 
 /**------------------------------------------------------------------------------------------------
+ * @brief   This fucntion is called whenever there is no other task running, user can add code
+ *          to be excuted in the background or could be a good idea to call a sleep instruction
+ * ----------------------------------------------------------------------------------------------*/
+void os_kernel_idleTask( void )
+{
+
+}
+
+
+/**------------------------------------------------------------------------------------------------
+ * @brief   Function called every time a context switch ocurres
+ * ----------------------------------------------------------------------------------------------*/
+void os_kernel_tickHook( void )
+{
+
+}
+
+
+/**------------------------------------------------------------------------------------------------
+ * @brief   the kernel will jump here when for any reason an object was trying to be created and 
+ *          failed because there wasn't left memory set in configTOTAL_HEAP_SIZE
+ * ----------------------------------------------------------------------------------------------*/
+void os_kernel_mallocFailedHook( void )
+{
+    __sys_assert( 0u );
+}
+
+
+/**------------------------------------------------------------------------------------------------
   * @brief  Reports the name of the source file and the source line number where the assert_param
   *         error has occurred. aplication rah here throuhg macro __sys_assert
   * @param  file: pointer to the source file name
