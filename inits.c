@@ -43,6 +43,9 @@ void hal_mspInit( void )
     rcc_clk_init_struct.ahbclk_divider  = _hal_rcc_sysclk_div1;
     rcc_clk_init_struct.apb1clk_divider = _hal_rcc_hclk_div1;
     hal_rcc_clockConfig( &rcc_clk_init_struct, _hal_flash_latency_1 );
+
+    /* Update global variable SystemCoreClock*/
+    hal_system_coreClockUpdate( );
 }
 
 
