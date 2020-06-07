@@ -1,8 +1,9 @@
 /**------------------------------------------------------------------------------------------------
   * @author  Hotboards Team
   * @version V1.0.0
-  * @date    18-June-2014
-  * @brief   Template
+  * @date    06-June-2020
+  * @brief   The file will only contains msp functions where the user will configure the pins to
+  *          a given peripheral
 -------------------------------------------------------------------------------------------------*/
 
 /* Includes -------------------------------------------------------------------------------------*/
@@ -15,11 +16,10 @@
 /* Private functions ----------------------------------------------------------------------------*/
 
 /**------------------------------------------------------------------------------------------------
-  * @brief  This function handles NMI exception.
-  * @param  None
-  * @retval None
+  * @brief  This function will be called by the hal_init function, nad only should be contain
+  *         code to be executed before the scheduler run
   -----------------------------------------------------------------------------------------------*/
-void hal_mspInit( void ) /* {{{{ */
+void hal_mspInit( void ) 
 {
     hal_rcc_clk_init_t rcc_clk_init_struct;
     hal_rcc_osc_init_t rcc_osc_init_struct;
@@ -43,16 +43,17 @@ void hal_mspInit( void ) /* {{{{ */
     rcc_clk_init_struct.ahbclk_divider  = _hal_rcc_sysclk_div1;
     rcc_clk_init_struct.apb1clk_divider = _hal_rcc_hclk_div1;
     hal_rcc_clockConfig( &rcc_clk_init_struct, _hal_flash_latency_1 );
-} /* }}}} */
+}
 
 
 /**------------------------------------------------------------------------------------------------
-  * @brief  This function handles NMI exception.
+  * @brief  Callbacj function to be called by hal_deInit functions and should be contain only
+  *         code to de-initialize what was initialized at mspInit function
   * @param  None
   * @retval None
   -----------------------------------------------------------------------------------------------*/
-void hal_mspDeInit( void ) /* {{{{ */
+void hal_mspDeInit( void )
 {
 
-} /* }}}} */
+}
 

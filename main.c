@@ -1,7 +1,7 @@
 /**------------------------------------------------------------------------------------------------
-  * @author  Hotboards Team
+  * @author  Diego Perez
   * @version V1.0.0
-  * @date    18-June-2014
+  * @date    06-June-2020
   * @brief   Template
 -------------------------------------------------------------------------------------------------*/
 
@@ -18,33 +18,35 @@ static void app_task_heartBit( void *params );
 
 
 /**------------------------------------------------------------------------------------------------
-  * @brief: Aplication entry point
+  * @brief  Aplication entry point
   * ---------------------------------------------------------------------------------------------*/
-int main ( void ) /* {{{{ */
+int main ( void )
 {
     app_setup( );
 
     os_task_create( app_task_heartBit, "bit", 128u, NULL, 2u, NULL );
     
     os_kernel_startScheduler( );
+    /* Program never reach this point */
     __sys_assert( 0u );
-} /* }}}} */
+}
 
 
 /**------------------------------------------------------------------------------------------------
- * @brief: General Initializations
+ * @brief   General Initializations, the function will be exceuted before the rtos scheduler 
+ *          start to run
  * ----------------------------------------------------------------------------------------------*/
-static void app_setup( void ) /* {{{{ */
+static void app_setup( void ) 
 {
     hal_init( );
-} /* }}}} */
+}
 
 
 /**------------------------------------------------------------------------------------------------
- * @brief: General Initializations
- * @param: void pointer to wherever user want to send to this task
+ * @brief   General Initializations
+ * @param   void pointer to wherever user want to send to this task
  * ----------------------------------------------------------------------------------------------*/
-static void app_task_heartBit( void *params ) /* {{{{ */
+static void app_task_heartBit( void *params )
 {
     hal_gpio_init_t led_struct;
     __hal_rcc_gpioa_clk_enable( );
@@ -60,7 +62,7 @@ static void app_task_heartBit( void *params ) /* {{{{ */
         hal_gpio_togglePin( GPIOA, _hal_gpio_pin_5 );
         os_task_delay( 1000u );
     }
-} /* }}}} */
+}
 
 
 /**------------------------------------------------------------------------------------------------
@@ -69,7 +71,7 @@ static void app_task_heartBit( void *params ) /* {{{{ */
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * ----------------------------------------------------------------------------------------------*/
-void assert_failed( char * file, int line ) /* {{{ */
+void assert_failed( char * file, int line )
 {
     /*disable all interrupts to prevent rtos from running again*/
     __os_disable_interrupts( );
@@ -82,4 +84,4 @@ void assert_failed( char * file, int line ) /* {{{ */
     {
         /* MISRA */
     }
-} /* }}} */
+}
