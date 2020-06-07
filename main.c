@@ -8,6 +8,7 @@
 /* Includes -------------------------------------------------------------------------------------*/
 #include "hal.h"
 #include "rtos.h"
+#include "globals.h"
 /* Private typedef ------------------------------------------------------------------------------*/
 /* Private define -------------------------------------------------------------------------------*/
 /* Private macro --------------------------------------------------------------------------------*/
@@ -54,12 +55,12 @@ static void app_task_heartBit( void *params )
     led_struct.mode  = _hal_gpio_mode_output_pp;
     led_struct.pull  = _hal_gpio_pullup;
     led_struct.speed = _hal_gpio_speed_freq_low;
-    led_struct.pin   = _hal_gpio_pin_5;
-    hal_gpio_init( GPIOA, &led_struct );
+    led_struct.pin   = _app_heart_bit_pin;
+    hal_gpio_init( _app_heart_bit_port, &led_struct );
 
     for( ; ; )
     {
-        hal_gpio_togglePin( GPIOA, _hal_gpio_pin_5 );
+        hal_gpio_togglePin( _app_heart_bit_port, _app_heart_bit_pin );
         os_task_delay( 1000u );
     }
 }
