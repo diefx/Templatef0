@@ -27,7 +27,7 @@ int main ( void )
     app_setup( );
 
     /* Place as many task need to registered to run */
-    os_task_create( app_task_heartBit, "bit", 128u, NULL, 2u, NULL );
+    os_task_create( app_task_heartBit, "bit", _app_heartbit_task_stack, NULL, _app_heartbit_task_priority, NULL );
 
     /* Run the freertos scheduler */   
     os_kernel_startScheduler( );
@@ -59,12 +59,12 @@ static void app_task_heartBit( void *params )
     led_struct.mode  = _hal_gpio_mode_output_pp;
     led_struct.pull  = _hal_gpio_pullup;
     led_struct.speed = _hal_gpio_speed_freq_low;
-    led_struct.pin   = _app_heart_bit_pin;
-    hal_gpio_init( _app_heart_bit_port, &led_struct );
+    led_struct.pin   = _app_heartbit_pin;
+    hal_gpio_init( _app_heartbit_port, &led_struct );
 
     for( ; ; )
     {
-        hal_gpio_togglePin( _app_heart_bit_port, _app_heart_bit_pin );
+        hal_gpio_togglePin( _app_heartbit_port, _app_heartbit_pin );
         os_task_delay( 1000u );
     }
 }

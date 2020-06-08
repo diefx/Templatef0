@@ -69,29 +69,30 @@
 /* Ensure stdint is only used by the compiler, and not the assembler. */
 #if defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__)
  #include <stdint.h>
+ #include "globals.h"
  extern uint32_t SystemCoreClock;
 #endif
 
-#define configUSE_PREEMPTION                    1
-#define configUSE_IDLE_HOOK                     1
-#define configUSE_TICK_HOOK                     1
+#define configUSE_PREEMPTION                    _rtos_use_preemption
+#define configUSE_IDLE_HOOK                     _rtos_use_idle_hook
+#define configUSE_TICK_HOOK                     _rtos_use_tick_hook
 #define configCPU_CLOCK_HZ                      ( SystemCoreClock )
-#define configTICK_RATE_HZ                      ( ( TickType_t ) 1000 )
-#define configMAX_PRIORITIES                    ( 7 )
-#define configMINIMAL_STACK_SIZE                ( ( uint16_t ) 128 )
-#define configTOTAL_HEAP_SIZE                   ( ( size_t ) ( 4 * 1024 ) )
-#define configMAX_TASK_NAME_LEN                 ( 16 )
-#define configUSE_TRACE_FACILITY                0
+#define configTICK_RATE_HZ                      ( ( TickType_t ) _rtos_tick_rate_hz )
+#define configMAX_PRIORITIES                    ( _rtos_max_priorities )
+#define configMINIMAL_STACK_SIZE                ( ( uint16_t ) _rtos_minimal_stack_size )
+#define configTOTAL_HEAP_SIZE                   ( ( size_t ) _rtos_total_heap_size )
+#define configMAX_TASK_NAME_LEN                 ( _rtos_max_task_name_len )
+#define configUSE_TRACE_FACILITY                _rtos_use_trace_facility
 #define configUSE_16_BIT_TICKS                  0
-#define configIDLE_SHOULD_YIELD                 1
-#define configUSE_MUTEXES                       0
-#define configQUEUE_REGISTRY_SIZE               8
-#define configCHECK_FOR_STACK_OVERFLOW          0
-#define configUSE_RECURSIVE_MUTEXES             0
-#define configUSE_MALLOC_FAILED_HOOK            0
-#define configUSE_APPLICATION_TASK_TAG          0
-#define configUSE_COUNTING_SEMAPHORES           0
-#define configGENERATE_RUN_TIME_STATS           0
+#define configIDLE_SHOULD_YIELD                 _rtos_idle_should_yield
+#define configUSE_MUTEXES                       _rtos_use_mutexes
+#define configQUEUE_REGISTRY_SIZE               _rtos_queue_registry_size
+#define configCHECK_FOR_STACK_OVERFLOW          _rtos_check_for_stack_overflow
+#define configUSE_RECURSIVE_MUTEXES             _rtos_use_recursive_mutexes
+#define configUSE_MALLOC_FAILED_HOOK            _rtos_use_malloc_failed_hook
+#define configUSE_APPLICATION_TASK_TAG          _rtos_application_task_tag
+#define configUSE_COUNTING_SEMAPHORES           _rtos_use_counting_semaphores
+#define configGENERATE_RUN_TIME_STATS           _rtos_generate_run_time_stats
 
 
 /* Software timer definitions. */
