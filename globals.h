@@ -42,7 +42,8 @@
 #define _rtos_generate_run_time_stats       0
 /* Global macro --------------------------------------------------------------------------------*/
 /* Global variables ----------------------------------------------------------------------------*/
-extern uint32_t         SystemCoreClock;
+extern uint32_t                             SystemCoreClock;
+extern hal_wwdg_handle_t                    wwdg_handle_struct;
 /* Global function prototypes ------------------------------------------------------------------*/
 
 #endif

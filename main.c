@@ -85,7 +85,8 @@ void os_kernel_idleTask( void )
  * ----------------------------------------------------------------------------------------------*/
 void os_kernel_tickHook( void )
 {
-
+    /*TO DO: find a better place to kick the dog*/
+    hal_wwdg_refresh( &wwdg_handle_struct );
 }
 
 
