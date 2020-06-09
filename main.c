@@ -101,6 +101,19 @@ void os_kernel_mallocFailedHook( void )
 
 
 /**------------------------------------------------------------------------------------------------
+ * @brief   The callback is called just after a wwdg event occurres and righ before a warn reset
+ *          user should place the code to handle the necesary steps to reset in a safety fashion
+ *          closing any pending process  
+ * @param   hwwdg: pointer to wwdg descriptor structure
+ * ----------------------------------------------------------------------------------------------*/
+void hal_wwdg_callback_earlyWakeup( hal_wwdg_handle_t *wwdg_handler )
+{
+    /*To avoid compiler warnings, while the user define its own content*/
+    ( void* )wwdg_handler;
+}
+
+
+/**------------------------------------------------------------------------------------------------
   * @brief  Reports the name of the source file and the source line number where the assert_param
   *         error has occurred. aplication rah here throuhg macro __sys_assert
   * @param  file: pointer to the source file name

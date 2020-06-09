@@ -57,7 +57,7 @@ void hal_mspInit( void )
     wwdg_handle_struct.init.prescaler = _hal_wwdg_prescaler_8;
     wwdg_handle_struct.init.window    = 0x50;
     wwdg_handle_struct.init.counter   = 0x7F;
-    wwdg_handle_struct.init.ewi_mode  = _hal_wwdg_ewi_disable;
+    wwdg_handle_struct.init.ewi_mode  = _hal_wwdg_ewi_enable;
     hal_wwdg_init( &wwdg_handle_struct );
 }
 

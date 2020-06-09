@@ -57,3 +57,13 @@ void hal_irq_sysTick( void )
     hal_incTick( );
 }
 
+
+/**------------------------------------------------------------------------------------------------
+  * @brief  This function handles windowed watchdog timer Interrupt.
+  * @param  None
+  * @retval None
+  -----------------------------------------------------------------------------------------------*/
+void hal_irq_wwdg( void )
+{
+    hal_wwdg_irqHandler( &wwdg_handle_struct );
+}
