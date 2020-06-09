@@ -21,6 +21,10 @@
 #define _app_heartbit_task_stack            128u
 #define _app_heartbit_task_priority           2u
 
+/*Peripheral priority interrupts definitions*/
+#define _app_wwdg_priority                  2u
+#define _app_wwdg_subPriority               2u
+
 /*Rtos configuration, these are the FreeRTOSConfig control definitions, DO NOT cast this defines*/
 #define _rtos_tick_rate_hz                  1000
 #define _rtos_max_priorities                7

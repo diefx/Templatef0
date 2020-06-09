@@ -55,6 +55,10 @@ static void app_setup( void )
     wwdg_handle_struct.init.counter   = 0x7F;
     wwdg_handle_struct.init.ewi_mode  = _hal_wwdg_ewi_enable;
     hal_wwdg_init( &wwdg_handle_struct );
+
+    /*configure and enable peripheral interrupts*/
+    hal_nvic_setPriority( _hal_wwdg_irq, _app_wwdg_priority, _app_wwdg_subPriority );
+    hal_nvic_enableIrq( _hal_wwdg_irq );
 }
 
 
