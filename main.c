@@ -13,6 +13,7 @@
 /* Private define -------------------------------------------------------------------------------*/
 /* Private macro --------------------------------------------------------------------------------*/
 /* Private variables ----------------------------------------------------------------------------*/
+hal_wwdg_handle_t  wwdg_handle_struct;
 /* Private function prototypes ------------------------------------------------------------------*/
 static void app_setup( void );
 static void app_task_heartBit( void *params );
@@ -43,6 +44,17 @@ int main ( void )
 static void app_setup( void ) 
 {
     hal_init( );
+    /* WWDG clock counter = (PCLK1 (48MHz)/4096)/8) = 1464.8 Hz (~683 us)
+    WWDG Window value = 80 (0x50) means that the WWDG counter should be refreshed only when the counter is 
+    below 80 and greater than 64 (0x40) otherwise a reset will be generated.
+    WWDG Counter value = 127 (0x7F), WWDG timeout = ~683 us * 64 = 43.7 ms
+    In this case the refresh window is comprised between : ~683 * (127-80) = 32.1 ms and ~683 * 64 = 43.7 ms */
+    wwdg_handle_struct.instance       = WWDG;
+    wwdg_handle_struct.init.prescaler = _hal_wwdg_prescaler_8;
+    wwdg_handle_struct.init.window    = 0x50;
+    wwdg_handle_struct.init.counter   = 0x7F;
+    wwdg_handle_struct.init.ewi_mode  = _hal_wwdg_ewi_enable;
+    hal_wwdg_init( &wwdg_handle_struct );
 }
 
 
