@@ -33,11 +33,11 @@
 #define _rtos_use_mutexes                   0
 #define _rtos_use_counting_semaphores       0
 #define _rtos_use_recursive_mutexes         0
-#define _rtos_use_malloc_failed_hook        0
+#define _rtos_use_malloc_failed_hook        1
 #define _rtos_use_trace_facility            0
 #define _rtos_idle_should_yield             1
 #define _rtos_queue_registry_size           4
-#define _rtos_check_for_stack_overflow      1
+#define _rtos_check_for_stack_overflow      0
 #define _rtos_application_task_tag          0
 #define _rtos_generate_run_time_stats       0
 /* Global macro --------------------------------------------------------------------------------*/
