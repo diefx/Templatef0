@@ -48,10 +48,10 @@ void hal_irq_hardFault( void )
 void hal_irq_sysTick( void )
 {
     /* query if the os is running */
-    if( os_kernel_getSchedulerState( ) != _os_scheduler_not_started )
+    if( rtos_kernel_getSchedulerState( ) != _rtos_scheduler_not_started )
     {
         /* service the os tick interrupt */
-        os_kernel_sysTickHandler( );
+        rtos_kernel_sysTickHandler( );
     }
     /* increment the internal tick for the hal drivers */
     hal_incTick( );

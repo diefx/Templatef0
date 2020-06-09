@@ -28,10 +28,10 @@ int main ( void )
     app_setup( );
 
     /* Place as many task need to registered to run */
-    os_task_create( app_task_heartBit, "bit", _app_heartbit_task_stack, NULL, _app_heartbit_task_priority, NULL );
+    rtos_task_create( app_task_heartBit, "bit", _app_heartbit_task_stack, NULL, _app_heartbit_task_priority, NULL );
 
     /* Run the freertos scheduler */   
-    os_kernel_startScheduler( );
+    rtos_kernel_startScheduler( );
     /* Program never reach this point */
     __sys_assert( 0u );
 }
@@ -81,7 +81,7 @@ static void app_task_heartBit( void *params )
     for( ; ; )
     {
         hal_gpio_togglePin( _app_heartbit_port, _app_heartbit_pin );
-        os_task_delay( 1000u );
+        rtos_task_delay( 1000u );
     }
 }
 
@@ -90,7 +90,7 @@ static void app_task_heartBit( void *params )
  * @brief   This fucntion is called whenever there is no other task running, user can add code
  *          to be excuted in the background or could be a good idea to call a sleep instruction
  * ----------------------------------------------------------------------------------------------*/
-void os_kernel_idleTask( void )
+void rtos_kernel_idleTask( void )
 {
 
 }
@@ -99,7 +99,7 @@ void os_kernel_idleTask( void )
 /**------------------------------------------------------------------------------------------------
  * @brief   Function called every time a context switch ocurres
  * ----------------------------------------------------------------------------------------------*/
-void os_kernel_tickHook( void )
+void rtos_kernel_tickHook( void )
 {
     /*TO DO: find a better place to kick the dog*/
     hal_wwdg_refresh( &wwdg_handle_struct );
@@ -110,7 +110,7 @@ void os_kernel_tickHook( void )
  * @brief   the kernel will jump here when for any reason an object was trying to be created and 
  *          failed because there wasn't left memory set in configTOTAL_HEAP_SIZE
  * ----------------------------------------------------------------------------------------------*/
-void os_kernel_mallocFailedHook( void )
+void rtos_kernel_mallocFailedHook( void )
 {
     __sys_assert( 0u );
 }
@@ -138,7 +138,7 @@ void hal_wwdg_callback_earlyWakeup( hal_wwdg_handle_t *wwdg_handler )
 void assert_failed( char * file, int line )
 {
     /*disable all interrupts to prevent rtos from running again*/
-    __os_disable_interrupts( );
+    __rtos_disable_interrupts( );
 
     #ifndef NDEBUG
          printf( "Suspected error on file: %s, line %d\r\n", file, line );
