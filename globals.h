@@ -25,10 +25,15 @@
 #define _app_wwdg_priority                  2u
 #define _app_wwdg_subPriority               2u
 
-/*Watch dog time windows calculation*/
-#define _app_wwdg_refresh_time              40u
+/* WWDG clock counter = (PCLK1 (48MHz)/4096)/8) = 1464.8 Hz (~683 us)
+WWDG Window value = 80 (0x50) means that the WWDG counter should be refreshed only when the counter is 
+below 80 and greater than 64 (0x40) otherwise a reset will be generated, 64 is fixed valueby the wwdg periphe.
+WWDG Counter value = 127 (0x7F), WWDG timeout = ~683 us * 64 = 43.7 ms
+In this case the refresh window is comprised between : ~683 * (127-80) = 32.1 ms and ~683 * 64 = 43.7 ms */
+#define _app_wwdg_preeescaler               _hal_wwdg_prescaler_8
+#define _app_wwdg_refresh_time              40u  /*this is asuitable value between the window time 32ms - 43ms*/
 #define _app_wwdg_max_count                 127u /*this is the starting count for the wwdg timer*/
-#define _app_wwdg_window_lower              80u  /*this value will determine the lower part of the window*/
+#define _app_wwdg_window_lower              80u  /*this value will determine the lower time of the window*/
 
 /*Rtos configuration, these are the FreeRTOSConfig control definitions, DO NOT cast this defines*/
 #define _rtos_tick_rate_hz                  1000
