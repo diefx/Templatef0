@@ -25,6 +25,11 @@
 #define _app_wwdg_priority                  2u
 #define _app_wwdg_subPriority               2u
 
+/*Watch dog time windows calculation*/
+#define _app_wwdg_refresh_time              40u
+#define _app_wwdg_max_count                 127u /*this is the starting count for the wwdg timer*/
+#define _app_wwdg_window_lower              80u  /*this value will determine the lower part of the window*/
+
 /*Rtos configuration, these are the FreeRTOSConfig control definitions, DO NOT cast this defines*/
 #define _rtos_tick_rate_hz                  1000
 #define _rtos_max_priorities                7

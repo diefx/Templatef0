@@ -51,8 +51,8 @@ static void app_setup( void )
     In this case the refresh window is comprised between : ~683 * (127-80) = 32.1 ms and ~683 * 64 = 43.7 ms */
     wwdg_handle_struct.instance       = WWDG;
     wwdg_handle_struct.init.prescaler = _hal_wwdg_prescaler_8;
-    wwdg_handle_struct.init.window    = 0x50;
-    wwdg_handle_struct.init.counter   = 0x7F;
+    wwdg_handle_struct.init.window    = _app_wwdg_window_lower;
+    wwdg_handle_struct.init.counter   = _app_wwdg_max_count;
     wwdg_handle_struct.init.ewi_mode  = _hal_wwdg_ewi_enable;
     hal_wwdg_init( &wwdg_handle_struct );
 
@@ -102,7 +102,15 @@ void rtos_kernel_idleTask( void )
 void rtos_kernel_tickHook( void )
 {
     /*TO DO: find a better place to kick the dog*/
-    hal_wwdg_refresh( &wwdg_handle_struct );
+    static uint32_t wwdg_kick = 0;
+    
+    wwdg_kick++;
+    if( wwdg_kick >= ( _app_wwdg_refresh_time / _rtos_tick_period_ms ) )
+    {
+        /*40ms has been pass, time to kick the dog */
+        hal_wwdg_refresh( &wwdg_handle_struct );
+        wwdg_kick = 0u;
+    }
 }
 
 
