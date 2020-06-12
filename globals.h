@@ -51,7 +51,7 @@ In this case the refresh window is comprised between : ~683 * (127-80) = 32.1 ms
 #define _rtos_use_trace_facility            0
 #define _rtos_idle_should_yield             1
 #define _rtos_queue_registry_size           4
-#define _rtos_check_for_stack_overflow      0
+#define _rtos_check_for_stack_overflow      1
 #define _rtos_application_task_tag          0
 #define _rtos_generate_run_time_stats       0
 /* Global macro --------------------------------------------------------------------------------*/

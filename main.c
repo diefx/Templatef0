@@ -122,6 +122,22 @@ void rtos_kernel_mallocFailedHook( void )
 
 
 /**------------------------------------------------------------------------------------------------
+ * @brief   the kernel will jump here when for any reason a task is created but is not enough stak
+ *          to allocate its internal variables
+ *          THIS FUCNTION SHOULD ONLY BE USED DURING DEVELOPMENT STAGE
+ * @param   task: task where the stack allocation failed
+ * @param   task_name: string id assigned to the task that failed do the stack allocation
+ * ----------------------------------------------------------------------------------------------*/
+void rtos_kernel_StackOverflowHook( rtos_task_handle_t task, signed char *task_name )
+{
+    #ifndef NDEBUG
+         printf( "Stack allocation error on task: %s\r\n", task_name );
+    #endif
+    __sys_assert( 0u );
+}
+
+
+/**------------------------------------------------------------------------------------------------
  * @brief   The callback is called just after a wwdg event occurres and righ before a warn reset
  *          user should place the code to handle the necesary steps to reset in a safety fashion
  *          closing any pending process  
