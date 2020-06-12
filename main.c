@@ -94,7 +94,9 @@ void rtos_kernel_idleTask( void )
 
 
 /**------------------------------------------------------------------------------------------------
- * @brief   Function called every time a context switch ocurres
+ * @brief   Function called every time a context switch ocurres. The executes from within an ISR 
+ *          so must be very short, not use  much stack, and not call any API functions that don’t 
+ *          end in “FromISR” or “FROM_ISR”.
  * ----------------------------------------------------------------------------------------------*/
 void rtos_kernel_tickHook( void )
 {
