@@ -44,6 +44,9 @@ void hal_mspInit( void )
     rcc_clk_init_struct.apb1clk_divider = _hal_rcc_hclk_div1;
     hal_rcc_clockConfig( &rcc_clk_init_struct, _hal_flash_latency_1 );
 
+    /*Configure external pin (A8) to monitor the system clock frequency*/
+    hal_rcc_mcoConfig( RCC_MCO1, _hal_rcc_mco1source_sysclk, _hal_rcc_mcodiv_64 );
+
     /* Update global variable SystemCoreClock*/
     hal_system_coreClockUpdate( );
 }
