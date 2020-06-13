@@ -13,8 +13,9 @@ PROJECT = test
 MCU = stm32f072rb
 
 #----library paths (can be relative or absolute)---------------------------------------------------
-HAL   = ../half0
-CMSIS = ../cmsisf0
+LL    = ../stm32f0/llf0
+HAL   = ../stm32f0/half0
+CMSIS = ../stm32f0/cmsisf0
 OS    = ../rtos
 
 #----Application files to be compiled--------------------------------------------------------------
@@ -35,6 +36,7 @@ HEAP  = 0x00000800
 STACK = 0x00000400
 
 #----include libraries makefiles-------------------------------------------------------------------
+include $(LL)/ll.mk
 include $(HAL)/hal.mk
 include $(CMSIS)/cmsis.mk
 include $(OS)/rtos.mk
