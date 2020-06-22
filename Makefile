@@ -4,19 +4,22 @@
 # @version V1.1
 # @date    26-November-2017
 # @brief   Application makefile to build the current project, this makefile
-#          applies only for stm32f0 targets
+#          applies only for stm32f0 targets, the makefiles make use of the sub makefiles ll.mk
+#		   hal.mk, cmsis.mk and also rtos.mk, it is very important user config the rtos.mk
+#		   to work with the corresponding port directory, in the case of stm32f0 the folder should be
+#		   ARM_CM0, the heap option will be according of the user application
 #--------------------------------------------------------------------------------------------------
 # Name for your current project
-PROJECT = test
+PROJECT = 
 
 #----F0 target to use------------------------------------------------------------------------------
-MCU = stm32f072rb
+MCU = 
 
 #----library paths (can be relative or absolute)---------------------------------------------------
-LL    = ../stm32f0/llf0
-HAL   = ../stm32f0/half0
-CMSIS = ../stm32f0/cmsisf0
-OS    = ../rtos
+LL    = 
+HAL   = 
+CMSIS = 
+OS    = 
 
 #----Application files to be compiled--------------------------------------------------------------
 OBJ = main.o interrupts.o inits.o
